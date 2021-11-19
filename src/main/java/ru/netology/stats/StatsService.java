@@ -14,6 +14,19 @@ public class StatsService {
 
     }
 
+    public int maxSales(long[] sales) {
+        int maxMonth = 0;
+        int month = 0;
+        for (long sale : sales) {
+
+            if (sale >= sales[maxMonth]) {
+                maxMonth = month;
+            }
+            month = month + 1;
+        }
+        return maxMonth + 1;
+    }
+
     public int minSales(long[] sales) {
         int minMonth = 0;
         int month = 0; // переменная для индекса рассматриваемого месяца в массиве
@@ -28,25 +41,11 @@ public class StatsService {
         return minMonth + 1;
     }
 
-    public int maxSales(long[] sales) {
-        int maxMonth = 0;
-        int month = 0;
-        for (long sale : sales) {
-
-            if (sale >= sales[maxMonth]) {
-                maxMonth = month;
-            }
-            month = month + 1;
-        }
-        return maxMonth + 1;
-    }
-
-
-
     public long findMonthBelowAverage(long[] sales) {
         int month = 0;
+        long average = findAverage(sales);
         for (long sale : sales) {
-            if (sale < findAverage(sales)) {
+            if (sale < average) {
                 month += 1;
             }
         }
@@ -55,8 +54,9 @@ public class StatsService {
 
     public long findMonthOverAverage(long[] sales) {
         int month = 0;
+        long average = findAverage(sales);
         for (long sale : sales) {
-            if (sale > findAverage(sales)) {
+            if (sale > average) {
                 month += 1;
             }
         }
